@@ -273,6 +273,7 @@ export function updateTransaction(
   });
 }
 
+// TODO: Fix split transaction length fatal error
 export function deleteTransaction(
   transactions: TransactionEntity[],
   id: string,
