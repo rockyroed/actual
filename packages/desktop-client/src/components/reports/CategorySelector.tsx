@@ -3,10 +3,10 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@actual-app/components/button';
-import { Text } from '@actual-app/components/text';
-import { View } from '@actual-app/components/view';
 import { styles } from '@actual-app/components/styles';
+import { Text } from '@actual-app/components/text';
 import { Tooltip } from '@actual-app/components/tooltip';
+import { View } from '@actual-app/components/view';
 
 import {
   type CategoryEntity,
