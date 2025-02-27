@@ -3,7 +3,9 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@actual-app/components/button';
+import { styles } from '@actual-app/components/styles';
 import { Text } from '@actual-app/components/text';
+import { Tooltip } from '@actual-app/components/tooltip';
 import { View } from '@actual-app/components/view';
 
 import {
@@ -74,33 +76,65 @@ export function CategorySelector({
           flexShrink: 0,
         }}
       >
-        <Button
-          variant="bare"
-          onPress={() => setUncheckedHidden(state => !state)}
-          style={{ padding: 8 }}
+        <Tooltip
+          placement="bottom start"
+          content={
+            <Text>
+              {uncheckedHidden ? t('Show unchecked') : t('Hide unchecked')}
+            </Text>
+          }
+          style={{
+            ...styles.tooltip,
+            lineHeight: 1.5,
+            padding: '6px 10px',
+          }}
         >
-          <View>
-            {uncheckedHidden ? (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <SvgViewShow
-                  width={15}
-                  height={15}
-                  style={{ marginRight: 5 }}
-                />
-                <Text>{t('Show unchecked')}</Text>
-              </View>
-            ) : (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <SvgViewHide
-                  width={15}
-                  height={15}
-                  style={{ marginRight: 5 }}
-                />
-                <Text>{t('Hide unchecked')}</Text>
-              </View>
-            )}
-          </View>
-        </Button>
+          <Button
+            variant="bare"
+            onPress={() => setUncheckedHidden(state => !state)}
+            style={{ padding: 8 }}
+          >
+            <View>
+              {uncheckedHidden ? (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <SvgViewShow
+                    width={15}
+                    height={15}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: '104px',
+                    }}
+                  >
+                    {t('Show unchecked')}
+                  </Text>
+                </View>
+              ) : (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <SvgViewHide
+                    width={15}
+                    height={15}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: '104px',
+                    }}
+                  >
+                    {t('Hide unchecked')}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </Button>
+        </Tooltip>
         <View style={{ flex: 1 }} />
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <GraphButton
