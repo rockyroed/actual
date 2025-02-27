@@ -281,17 +281,22 @@ export function deleteTransaction(
     if (trans.is_parent) {
       if (trans.id === id) {
         return null;
-      } else if (trans.subtransactions?.length === 1) {
-        const { error, subtransactions, ...rest } = trans;
-        return {
-          ...rest,
-          is_parent: false,
-        } satisfies TransactionEntity;
       } else {
         const sub = trans.subtransactions?.filter(t => t.id !== id);
+
+        if (!sub || sub.length === 0) {
+          const converted = {
+            ...trans,
+            is_parent: false,
+            error: null,
+            subtransactions: undefined
+          } satisfies TransactionEntity;
+          return converted;
+        }
+
         return recalculateSplit({
           ...trans,
-          ...(sub && { subtransactions: sub }),
+          subtransactions: sub,
         });
       }
     } else {
