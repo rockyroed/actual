@@ -2058,7 +2058,7 @@ export const TransactionTable = forwardRef((props, ref) => {
         t => t.id === splitsExpanded.state.transitionId,
       );
       result = props.transactions.filter((t, idx) => {
-        if (t.parent_id) {
+        if (t && t.parent_id) {
           if (idx >= index) {
             return splitsExpanded.isExpanded(t.parent_id);
           } else if (prevSplitsExpanded.current) {
@@ -2078,7 +2078,7 @@ export const TransactionTable = forwardRef((props, ref) => {
       prevSplitsExpanded.current = splitsExpanded;
 
       result = props.transactions.filter(t => {
-        if (t.parent_id) {
+        if (t && t.parent_id) {
           return splitsExpanded.isExpanded(t.parent_id);
         }
         return true;

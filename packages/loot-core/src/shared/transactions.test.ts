@@ -206,4 +206,31 @@ describe('Transactions', () => {
       expect.objectContaining({ amount: 3002 }),
     ]);
   });
+
+  test('converts parent to regular transaction when all subtransactions are deleted', () => {
+    const transactions = [
+      makeTransaction({ amount: 2001 }),
+      ...makeSplitTransaction({ id: 't1', amount: 2500 }, [
+        { id: 't2', amount: 2000 },
+        { id: 't3', amount: 500 },
+      ]),
+      makeTransaction({ amount: 3002 }),
+    ];
+
+    let result = deleteTransaction(transactions, 't2');
+    result = deleteTransaction(result.data, 't3');
+
+    expect(result.data).toEqual([
+      expect.objectContaining({ amount: 2001 }),
+      expect.objectContaining({
+        id: 't1',
+        amount: 2500,
+        is_parent: false,
+        error: null,
+      }),
+      expect.objectContaining({ amount: 3002 }),
+    ]);
+
+    expect(result.data.find(t => t.parent_id)).toBeFalsy();
+  });
 });
