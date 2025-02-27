@@ -611,7 +611,7 @@ export function RecurringSchedulePicker({
 
       <Popover
         triggerRef={triggerRef}
-        style={{ padding: 10, width: 380 }}
+        style={{ padding: 10, width: 380, minHeight: 280 }}
         placement="bottom start"
         isOpen={isOpen}
         onOpenChange={() => setIsOpen(false)}
