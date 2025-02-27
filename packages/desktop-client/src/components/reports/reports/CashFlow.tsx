@@ -63,6 +63,7 @@ type CashFlowInnerProps = {
   widget?: CashFlowWidget;
 };
 
+// TODO: Fix cash flow report edit view
 function CashFlowInner({ widget }: CashFlowInnerProps) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
