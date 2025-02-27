@@ -289,7 +289,7 @@ export function deleteTransaction(
             ...trans,
             is_parent: false,
             error: null,
-            subtransactions: undefined
+            subtransactions: undefined,
           } satisfies TransactionEntity;
           return converted;
         }
